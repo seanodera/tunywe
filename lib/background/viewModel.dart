@@ -15,7 +15,7 @@ class ViewModel with ChangeNotifier {
   List<BasketItem> _basket = new List();
   FirebaseUser _user;
 
-  UnmodifiableListView<BasketItem> get basket =>
+  List<BasketItem> get basket =>
       UnmodifiableListView(_basket);
 
   UnmodifiableListView<PreviousOrder> get previousOrderList =>

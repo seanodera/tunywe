@@ -1,15 +1,15 @@
 import 'dart:core';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tunywe/background/viewModel.dart';
+import 'package:tunywe/ui/home/order/bottle/BottleList.dart';
 
 import 'model.dart';
 
-Future<bool> getCombined(ViewModel viewModel) async {
+Future<List<Combined>> getCombined(ViewModel viewModel) async {
   List<Combined> list = new List();
   var snaps = await Firestore.instance.collection('products').getDocuments();
   snaps.documents.forEach((bottle) async {
@@ -32,7 +32,7 @@ Future<bool> getCombined(ViewModel viewModel) async {
   });
 
   viewModel.combinedList = list;
-  return true;
+  return list;
 }
 
 Future<List<PreviousOrder>> getPreviousBottle(ViewModel viewModel) async {
@@ -68,12 +68,13 @@ initialize(BuildContext context) async {
   ViewModel viewModel = Provider.of<ViewModel>(context, listen: false);
   SharedPreferences preferences = await SharedPreferences.getInstance();
   FirebaseUser user = await FirebaseAuth.instance.currentUser();
+  redoFunction(viewModel);
   viewModel.user = user;
   viewModel.preferences = preferences;
-  getCombined(viewModel);
+ // getCombined(viewModel);
 }
 
-Future<List<Address>>getAddresses(ViewModel viewModel) async {
+Future<List<Address>> getAddresses(ViewModel viewModel) async {
   List<Address> list = new List();
   var doc = Firestore.instance
       .collection('users')
@@ -85,4 +86,40 @@ Future<List<Address>>getAddresses(ViewModel viewModel) async {
     });
   });
   return list;
+}
+
+redoFunction(ViewModel viewModel) {
+  debugPrint('function called');
+  Firestore fireStore = Firestore.instance;
+  List<Combined> bottleList = new List();
+  fireStore.collection('products').getDocuments().then((snapshot) {
+    snapshot.documents.forEach((element) {
+      Bottle bottle = Bottle.fromMap(element.data);
+      PreParedBottle preParedBottle = PreParedBottle(
+          bottleId: bottle.bottleId,
+          bottleName: bottle.bottleName,
+          description: bottle.description,
+          image: (bottle.pictureUrl == null)
+              ? NetworkImage(
+                  'https://images.unsplash.com/photo-1592466509322-3318a3d907d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1208&q=80')
+              : NetworkImage(bottle.pictureUrl));
+      List<BottleSize> list = new List();
+      fireStore
+          .collection('products')
+          .document(element.documentID)
+          .collection('prices')
+          .getDocuments()
+          .then((value) {
+        value.documents.forEach((ds) {
+          BottleSize size = BottleSize.fromMap(ds.data);
+          list.add(size);
+          debugPrint('Size list length ' + list.length.toString());
+        });
+        bottleList.add(Combined(preParedBottle, list));
+        debugPrint(bottleList.length.toString());
+      });
+    });
+  });
+  viewModel.combinedList = bottleList;
+  // viewModel.combinedList = bottleList;
 }

@@ -36,10 +36,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                Container(
-                  height: 150,
-                  child: Image.asset('assets/logo.png'),
-                ),
+
                 Container(
                   //padding: EdgeInsets.all(20.0),
                     margin: EdgeInsets.all(15.0),

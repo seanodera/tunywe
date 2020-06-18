@@ -16,22 +16,8 @@ class HomeNav extends StatefulWidget {
 
 class _HomeNavState extends State<HomeNav> {
   int _selectedIndex;
-  List<Widget>  _widgetOptions  = [
-    Welcome(),
-    Consumer<ViewModel>(
-      builder: (context, notifier, child) {
-        return Order();
-      },
-      child: Order(),
-    ),
-    Consumer<ViewModel>(
-      builder: (context, notifier, child) {
-        return Search();
-      },
-      child: Search(),
-    ),
-    Consumer<ViewModel>(builder: (a, b, c) => Profile())
-  ];
+
+
   @override
   void initState() {
     _selectedIndex = 0;
@@ -41,7 +27,22 @@ class _HomeNavState extends State<HomeNav> {
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
-
+    List<Widget> _widgetOptions = [
+       Welcome(Provider.of<ViewModel>(context)),
+      Consumer<ViewModel>(
+        builder: (context, notifier, child) {
+          return Order();
+        },
+        child: Order(),
+      ),
+      Consumer<ViewModel>(
+        builder: (context, notifier, child) {
+          return Search();
+        },
+        child: Search(),
+      ),
+      Consumer<ViewModel>(builder: (a, b, c) => Profile())
+    ];
     return Scaffold(
       body: _widgetOptions.elementAt(_selectedIndex),
 //      bottomNavigationBar: BottomNavigationBar(items: [

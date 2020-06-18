@@ -53,6 +53,10 @@ class _BasketState extends State<Basket> {
                 icon: Icon(LineAwesomeIcons.remove),
                 onPressed: () {
                   DatabaseProvider.db.delete(basketItem);
+                  viewModel.basket.remove(basketItem);
+                  setState(() {
+                    list.remove(basketItem);
+                  });
                 },
               ),
             ),
@@ -63,13 +67,23 @@ class _BasketState extends State<Basket> {
       bottomNavigationBar: PreferredSize(
         preferredSize: Size(double.maxFinite, 80),
         child: RaisedButton(
-          onPressed: () => (viewModel.user == null || viewModel.user.isAnonymous)? Flushbar(
-          titleText: RaisedButton(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()))),
-          ): Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      Consumer<ViewModel>(builder: (a, b, c) => SelectAddress()))),
+          color: Theme.of(context).accentColor,
+          onPressed: () =>
+              (viewModel.user == null || viewModel.user.isAnonymous)
+                  ? Flushbar(
+                      titleText: Text('Sign in First'),
+                      messageText: RaisedButton(
+                          child: Text('Sign in or create an account'),
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()))),
+                    ).show(context)
+                  : Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Consumer<ViewModel>(
+                              builder: (a, b, c) => SelectAddress()))),
           child: Text('Proceed to Checkout'),
         ),
       ),

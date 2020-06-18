@@ -17,60 +17,85 @@ class _SelectAddressState extends State<SelectAddress> {
 
   @override
   void initState() {
-    getAddresses(Provider.of<ViewModel>(context)).then((value) {
-      setState(() {
-        addressList = value;
-      });
-    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    getAddresses(Provider.of<ViewModel>(context)).then((value) {
+      setState(() {
+        addressList = value;
+      });
+    });
     return CustomScrollView(
       slivers: (addressList == null)
           ? [
               SliverToBoxAdapter(
+                  child: Material(
+                color: Colors.transparent,
                 child: CircularProgressIndicator(
                   backgroundColor: CommonColors.primary,
                 ),
-              )
+              ))
             ]
-          : (addressList.isEmpty)? [
-            SliverToBoxAdapter(
-              child: Text('No addresses found'),
-            ),
-        SliverToBoxAdapter(
-          child: RaisedButton.icon(
-              onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => NewAddress(toHome: false,))),
-              icon: Icon(Icons.add),
-              label: Text('Add Address')),
-        )
-      ] : [
-              SliverList(
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                Address address = addressList[index];
-                return ListTile(
-                  leading: Text(address.suburb),
-                  title:
-                      Text(address.apartmentName + ' - ' + address.houseNumber),
-                  subtitle: Text(address.street),
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Consumer<ViewModel>(
-                              builder: (a, b, c) => Checkout(address: address,)))),
-                );
-              }, childCount: addressList.length)),
-              SliverToBoxAdapter(
-                child: RaisedButton.icon(
-                    onPressed: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => NewAddress(toHome: false,))),
-                    icon: Icon(Icons.add),
-                    label: Text('Add Address')),
-              ),
-            ],
+          : (addressList.isEmpty)
+              ? [
+                  SliverToBoxAdapter(
+                    child: Material(
+                        child: Text('No addresses found'),
+                        color: Colors.transparent),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Material(
+                      child: RaisedButton.icon(
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NewAddress(
+                                        toHome: false,
+                                      ))),
+                          icon: Icon(Icons.add),
+                          label: Text('Add Address')),
+                      color: Colors.transparent,
+                    ),
+                  )
+                ]
+              : [
+                  SliverList(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                    Address address = addressList[index];
+                    return Material(
+                      color: Colors.transparent,
+                      child: ListTile(
+                        leading: Text(address.suburb),
+                        title: Text(address.apartmentName +
+                            ' - ' +
+                            address.houseNumber),
+                        subtitle: Text(address.street),
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Consumer<ViewModel>(
+                                    builder: (a, b, c) => Checkout(
+                                          address: address,
+                                        )))),
+                      ),
+                    );
+                  }, childCount: addressList.length)),
+                  SliverToBoxAdapter(
+                    child: Material(
+                        child: RaisedButton.icon(
+                            onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => NewAddress(
+                                          toHome: false,
+                                        ))),
+                            icon: Icon(Icons.add),
+                            label: Text('Add Address')),
+                        color: Colors.transparent),
+                  ),
+                ],
     );
   }
 }

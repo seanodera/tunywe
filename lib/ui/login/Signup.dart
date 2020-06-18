@@ -29,7 +29,7 @@ class _SignUpState extends State<SignUp> {
           email: email.text, password: pass.text)
           .then((value) {
         viewModel.user = value.user;
-        Firestore.instance.collection('user').document(value.user.uid).setData(
+        Firestore.instance.collection('users').document(value.user.uid).setData(
             UserDetails(value.user.uid, value.user.email, fName.text,
                 sName.text, dateTime.toString())
                 .toMap()).then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => NewAddress(toHome: true,))));

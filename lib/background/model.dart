@@ -115,9 +115,9 @@ class BottleSize {
   String sizeId;
   String capacity;
   String price;
-  int stockCount;
+  dynamic stockCount;
 
-  BottleSize.fromMap(Map<String, dynamic> data) {
+  BottleSize.fromMap(Map<dynamic, dynamic> data) {
     this.sizeId = data[MapNames.sizeId];
     this.capacity = data[MapNames.capacity];
     this.price = data[MapNames.price];

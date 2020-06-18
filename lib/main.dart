@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,12 +20,14 @@ void main() => runApp((MultiProvider(
           cardColor: Colors.white,
           primaryColor: Colors.white,
           accentColor: CommonColors.primary,
+          backgroundColor: Colors.white60,
           appBarTheme:
               AppBarTheme(color: Colors.white, brightness: Brightness.light),
         ),
         themeMode: ThemeMode.system,
         darkTheme: ThemeData(
             brightness: Brightness.dark,
+            backgroundColor: Colors.grey[800],
             appBarTheme: AppBarTheme(
                 brightness: Brightness.dark, color: CommonColors.otherGrey),
             primaryColor: Colors.black,
@@ -66,7 +69,7 @@ class _PreSplashState extends State<PreSplash> {
 }
 
 start(BuildContext context) async {
-  SharedPreferences preferences = await SharedPreferences.getInstance(); 
+  SharedPreferences preferences = await SharedPreferences.getInstance();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
@@ -78,16 +81,18 @@ start(BuildContext context) async {
         cardColor: Colors.white,
         primaryColor: Colors.white,
         accentColor: CommonColors.primary,
+        backgroundColor: Colors.white70,
         appBarTheme:
-        AppBarTheme(color: Colors.white, brightness: Brightness.light),
+            AppBarTheme(color: Colors.white, brightness: Brightness.light),
       ),
       themeMode: (preferences.get('theme') == 'system')
           ? ThemeMode.system
           : (preferences.get('theme') == 'dark')
-          ? ThemeMode.dark
-          : ThemeMode.light,
+              ? ThemeMode.dark
+              : ThemeMode.light,
       darkTheme: ThemeData(
           brightness: Brightness.dark,
+          buttonColor: CommonColors.primary,
           appBarTheme: AppBarTheme(
               brightness: Brightness.dark, color: CommonColors.otherGrey),
           primaryColor: Colors.black,
@@ -104,7 +109,10 @@ class Splash extends StatelessWidget {
     Timer(
         Duration(seconds: 5),
         () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeNav())));
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    Consumer<ViewModel>(builder: (a, b, c) => HomeNav()))));
     return Container(
       color: Colors.black,
       child: Column(

@@ -13,32 +13,31 @@ class BottleItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PreParedBottle bottle = combined.bottle;
-    return FlatButton(
-        child: Card(
-          margin: EdgeInsets.all(5),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                height: 100,
-                width: 100,
-                margin: EdgeInsets.only(left: 5, right: 10),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: bottle.image,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-              Text(bottle.bottleName),
-            ],
+    var sizeList = combined.bottleSizes;
+    sizeList.sort((a,b) => int.parse(a.price).compareTo(int.parse(b.price)));
+    int price = int.parse( sizeList.last.price);
+    return Material(
+      color: Colors.transparent,
+      child: ListTile(
+        isThreeLine: true,
+        leading: Container(
+          width: 75,
+          height: 100,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: bottle.image,
+              fit: BoxFit.fill,
+            ),
           ),
         ),
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) =>
+        title: Text(bottle.bottleName),
+        subtitle: Text('from ' + price.toString()),
+
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) =>
             Consumer<ViewModel>(
                 builder: (a, b, c) => BottleView(combined: combined)))),
-      );
+      ),
+    );
   }
 }
