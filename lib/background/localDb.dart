@@ -70,6 +70,6 @@ class DatabaseProvider {
     final db = await database;
     print('bottle deleted');
     db.delete(Table_Basket,
-        where: '$ColumnBottleID', whereArgs: [item.bottleID]);
+        where: '$ColumnBottleID = ?', whereArgs: [item.bottleID]);
   }
 }

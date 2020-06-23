@@ -5,8 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'model.dart';
 
 class ViewModel with ChangeNotifier {
-
-  List<PlacedOrder> _orders = new List();
+  List<ActiveOrder> _orders = new List();
   Bottle _currentBottle;
   List<Combined> _combinedList = new List();
   Combined _combo;
@@ -14,14 +13,17 @@ class ViewModel with ChangeNotifier {
   List<PreviousOrder> _previousOrderList = new List();
   List<BasketItem> _basket = new List();
   FirebaseUser _user;
+  List<Address> _addressList = new List();
 
-  List<BasketItem> get basket =>
-      UnmodifiableListView(_basket);
+  UnmodifiableListView<Address> get addressList => UnmodifiableListView(_addressList);
+
+  List<BasketItem> get basket => _basket;
 
   UnmodifiableListView<PreviousOrder> get previousOrderList =>
       UnmodifiableListView(_previousOrderList);
 
-  UnmodifiableListView<PlacedOrder> get orders => UnmodifiableListView(_orders);
+  UnmodifiableListView<ActiveOrder> get orders => UnmodifiableListView(_orders);
+
   UnmodifiableListView<Combined> get combinedList =>
       UnmodifiableListView(_combinedList);
 
@@ -33,7 +35,12 @@ class ViewModel with ChangeNotifier {
 
   FirebaseUser get user => _user;
 
-  set orders(List<PlacedOrder> orders){
+  set addressList(List<Address> addresses) {
+    this._addressList = addresses;
+    notifyListeners();
+  }
+
+  set orders(List<ActiveOrder> orders) {
     this._orders = orders;
     notifyListeners();
   }

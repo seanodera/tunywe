@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -82,17 +80,20 @@ start(BuildContext context) async {
         primaryColor: Colors.white,
         accentColor: CommonColors.primary,
         backgroundColor: Colors.white70,
+          textTheme: TextTheme(headline4: TextStyle(color: Colors.black)),
         appBarTheme:
             AppBarTheme(color: Colors.white, brightness: Brightness.light),
+        buttonColor: CommonColors.primary
       ),
       themeMode: (preferences.get('theme') == 'system')
           ? ThemeMode.system
           : (preferences.get('theme') == 'dark')
               ? ThemeMode.dark
-              : ThemeMode.light,
+              :  (preferences.get('theme') == 'Light')? ThemeMode.light : ThemeMode.system,
       darkTheme: ThemeData(
           brightness: Brightness.dark,
           buttonColor: CommonColors.primary,
+          textTheme: TextTheme(headline4: TextStyle(color: Colors.white)),
           appBarTheme: AppBarTheme(
               brightness: Brightness.dark, color: CommonColors.otherGrey),
           primaryColor: Colors.black,

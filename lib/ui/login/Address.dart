@@ -2,7 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:provider/provider.dart';
 import 'package:tunywe/background/model.dart';
+import 'package:tunywe/background/source_functions.dart';
+import 'package:tunywe/background/viewModel.dart';
 import 'package:tunywe/ui/homeNav.dart';
 
 class NewAddress extends StatefulWidget {
@@ -108,6 +111,7 @@ class _NewAddressState extends State<NewAddress> {
                       border: Border(bottom: BorderSide(color: Colors.black38)),
                     ),
                     child: TextField(
+                      controller: this.street,
                       decoration: InputDecoration(
                           focusedBorder: InputBorder.none,
                           border: InputBorder.none,
@@ -119,6 +123,7 @@ class _NewAddressState extends State<NewAddress> {
                       border: Border(bottom: BorderSide(color: Colors.black38)),
                     ),
                     child: TextField(
+                      controller: this.apartmentName,
                       decoration: InputDecoration(
                           focusedBorder: InputBorder.none,
                           border: InputBorder.none,
@@ -130,6 +135,7 @@ class _NewAddressState extends State<NewAddress> {
                       border: Border(bottom: BorderSide(color: Colors.black38)),
                     ),
                     child: TextField(
+                      controller: this.houseNumber,
                       decoration: InputDecoration(
                           focusedBorder: InputBorder.none,
                           border: InputBorder.none,
@@ -144,6 +150,7 @@ class _NewAddressState extends State<NewAddress> {
           Text('Additional instructions'),
           Card(
             child: TextField(
+              controller: this.additionalInstructions,
               decoration: InputDecoration(
                 hintText: 'Additional instructions',
                 border: InputBorder.none,
@@ -175,11 +182,14 @@ class _NewAddressState extends State<NewAddress> {
                               latitude: value.latitude)
                           .toMap())
                       .whenComplete(() {
-                    (widget.toHome == true)? Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomeNav())) : Navigator.pop(context);
+                    (widget.toHome == true)
+                        ? Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => HomeNav()))
+                        : Navigator.pop(context);
                   });
                 });
               });
+              getAddresses(Provider.of<ViewModel>(context));
             },
             child: Container(
               height: 50,

@@ -46,6 +46,7 @@ dependencies:
   path:
   sprintf:
   rest_client:
+  flutter_animation_progress_bar:
 
 
 dev_dependencies:

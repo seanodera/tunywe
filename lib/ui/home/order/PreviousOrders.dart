@@ -18,15 +18,15 @@ class _PreviousOrdersState extends State<PreviousOrders> {
 
   @override
   void initState() {
-    viewModel = Provider.of<ViewModel>(context);
-    (viewModel.previousOrderList == null)
-        ? getPreviousBottle(viewModel)
-        : print('already has');
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    viewModel = Provider.of<ViewModel>(context);
+    (viewModel.previousOrderList.isEmpty)
+        ? getPreviousBottle(viewModel)
+        : print('already has');
     return (viewModel.previousOrderList == null ||
             viewModel.previousOrderList.isEmpty)
         ? Column(
@@ -36,7 +36,6 @@ class _PreviousOrdersState extends State<PreviousOrders> {
             children: [
               Icon(LineAwesomeIcons.close),
               Text("You Haven't bought anything from us yet"),
-              Text('Rick is a madam!!'),
             ],
           )
         : ListView.builder(

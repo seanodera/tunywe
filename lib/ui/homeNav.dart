@@ -3,13 +3,16 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:tunywe/background/viewModel.dart';
-import 'package:tunywe/ui/home/Search.dart';
 import 'package:tunywe/ui/home/Welcome.dart';
 
 import 'home/Order.dart';
 import 'home/Profile.dart';
 
 class HomeNav extends StatefulWidget {
+  final int goTo;
+
+  HomeNav({this.goTo});
+
   @override
   _HomeNavState createState() => _HomeNavState();
 }
@@ -17,10 +20,9 @@ class HomeNav extends StatefulWidget {
 class _HomeNavState extends State<HomeNav> {
   int _selectedIndex;
 
-
   @override
   void initState() {
-    _selectedIndex = 0;
+    (widget.goTo == null) ? _selectedIndex = 0 : _selectedIndex = widget.goTo;
     super.initState();
   }
 
@@ -28,27 +30,23 @@ class _HomeNavState extends State<HomeNav> {
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
     List<Widget> _widgetOptions = [
-       Welcome(Provider.of<ViewModel>(context)),
+      Welcome(Provider.of<ViewModel>(context)),
       Consumer<ViewModel>(
         builder: (context, notifier, child) {
           return Order();
         },
         child: Order(),
       ),
-      Consumer<ViewModel>(
-        builder: (context, notifier, child) {
-          return Search();
-        },
-        child: Search(),
-      ),
+//      Consumer<ViewModel>(
+//        builder: (context, notifier, child) {
+//          return Search();
+//        },
+//        child: Search(),
+      //     ),
       Consumer<ViewModel>(builder: (a, b, c) => Profile())
     ];
     return Scaffold(
       body: _widgetOptions.elementAt(_selectedIndex),
-//      bottomNavigationBar: BottomNavigationBar(items: [
-//        BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home'),activeIcon: Icon(Icons.home,color: CommonColors.primary,)),
-//        BottomNavigationBarItem(icon: Icon(LineAwesomeIcons.glass), title: Text('Order'), activeIcon: Icon(LineAwesomeIcons.reorder,color: CommonColors.primary,))
-//      ]),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(color: themeData.cardColor, boxShadow: [
           BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
@@ -72,10 +70,10 @@ class _HomeNavState extends State<HomeNav> {
                     icon: LineAwesomeIcons.glass,
                     text: 'Order',
                   ),
-                  GButton(
-                    icon: LineAwesomeIcons.search,
-                    text: 'Search',
-                  ),
+//                  GButton(
+//                    icon: LineAwesomeIcons.search,
+//                    text: 'Search',
+//                  ),
                   GButton(
                     icon: LineAwesomeIcons.user,
                     text: 'Profile',

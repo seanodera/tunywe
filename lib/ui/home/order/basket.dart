@@ -46,17 +46,22 @@ class _BasketState extends State<Basket> {
           return Card(
             child: ListTile(
               leading: Text(basketItem.bottleCount.toString()),
-              title: Text(bottle.bottleName + '-' + size.capacity),
+              title: Text(bottle.bottleName + '-' + size.capacity + 'ml'),
               subtitle: Text('Total: ' +
                   (basketItem.bottleCount * int.parse(size.price)).toString()),
               trailing: IconButton(
                 icon: Icon(LineAwesomeIcons.remove),
                 onPressed: () {
                   DatabaseProvider.db.delete(basketItem);
-                  viewModel.basket.remove(basketItem);
                   setState(() {
                     list.remove(basketItem);
+                    viewModel.basket = list;
                   });
+//                  Navigator.push(
+//                      context,
+//                      MaterialPageRoute(
+//                          builder: (context) =>
+//                              Consumer<ViewModel>(builder: (a, b, c) => Basket())));
                 },
               ),
             ),

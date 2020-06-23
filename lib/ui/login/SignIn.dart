@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tunywe/background/model.dart';
 import 'package:tunywe/background/viewModel.dart';
+import 'package:tunywe/ui/homeNav.dart';
 
 import 'Signup.dart';
 
@@ -36,9 +37,8 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-
                 Container(
-                  //padding: EdgeInsets.all(20.0),
+                    //padding: EdgeInsets.all(20.0),
                     margin: EdgeInsets.all(15.0),
                     height: 40,
                     width: 300,
@@ -66,8 +66,8 @@ class _LoginPageState extends State<LoginPage> {
                           fillColor: CommonColors.accentHex,
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: CommonColors.accentHex,
-                              )),
+                            color: CommonColors.accentHex,
+                          )),
                           icon: Icon(
                             Icons.person_outline,
                             color: CommonColors.accentHex,
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     )),
                 Container(
-                  //padding: EdgeInsets.all(20.0),
+                    //padding: EdgeInsets.all(20.0),
                     margin: EdgeInsets.all(15.0),
                     height: 40,
                     width: 300,
@@ -104,13 +104,14 @@ class _LoginPageState extends State<LoginPage> {
                           fillColor: CommonColors.accentHex,
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: CommonColors.accentHex,
-                              )),
+                            color: CommonColors.accentHex,
+                          )),
                           icon: Icon(
                             Icons.lock_outline,
                             color: CommonColors.accentHex,
                           ),
                         ),
+                        controller: pass,
                       ),
                     )),
                 InkWell(
@@ -130,9 +131,14 @@ class _LoginPageState extends State<LoginPage> {
                     onTap: () {
                       FirebaseAuth.instance
                           .signInWithEmailAndPassword(
-                          email: email.text, password: pass.text)
+                              email: email.text, password: pass.text)
                           .then((value) {
                         viewModel.user = value.user;
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Consumer<ViewModel>(
+                                    builder: (a, b, c) => HomeNav())));
                       }).catchError(() {
                         print('Error occured');
                       });

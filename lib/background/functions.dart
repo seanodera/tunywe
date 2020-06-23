@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:tunywe/background/viewModel.dart';
-
 import 'model.dart';
 
 listProcess() {
@@ -15,6 +13,7 @@ listProcess() {
   Types tequila = new Types('Tequila', 'assets/tequilla.png');
   Types wine = new Types('Wines', 'assets/wine.png');
   Types beer = new Types('Beer', 'assets/beer.png');
+  Types liqueur = Types('Liqueur', 'assets/liqueur.png');
   typesList.add(whiskey);
   typesList.add(vodka);
   typesList.add(cognac);
@@ -23,7 +22,7 @@ listProcess() {
   typesList.add(tequila);
   typesList.add(wine);
   typesList.add(beer);
-
+  typesList.add(liqueur);
   return typesList;
 }
 
@@ -46,18 +45,4 @@ postOrder(PlacedOrder order) async {
       collection.collection('bottles').add(element.toMap());
     });
   });
-}
-
-Future<bool>checkActiveOrders(ViewModel viewModel) async {
-  var value = await Firestore.instance.collection('Active Orders').where(
-      MapNames.uid, isGreaterThanOrEqualTo: viewModel.user.uid).getDocuments();
-  if (value.documents.isNotEmpty == true) {
-    List<PlacedOrder> list = new List();
-    value.documents.forEach((element) {
-      list.add(PlacedOrder.fromMap(element.data));
-    });
-    viewModel.orders = list;
-    return value.documents.isNotEmpty;
-  }
-  return value.documents.isNotEmpty;
 }

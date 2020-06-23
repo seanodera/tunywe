@@ -53,18 +53,18 @@ class PlacedOrder {
   String uid;
   List<BasketItem> bottles;
 
-  PlacedOrder(
-      {this.orderId,
-      this.totalCost,
-      this.orderTime,
-      this.status,
-      this.paymentMethod,
-      this.rider,
-      this.addressId,
-      this.bottles,
-      this.uid});
+  PlacedOrder({this.orderId,
+    this.totalCost,
+    this.orderTime,
+    this.status,
+    this.paymentMethod,
+    this.rider,
+    this.addressId,
+    this.bottles,
+    this.uid});
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toMap() =>
+      {
         MapNames.orderId: this.orderId,
         MapNames.totalCost: this.totalCost,
         MapNames.orderTime: this.orderTime,
@@ -92,12 +92,14 @@ class Bottle {
   String bottleName;
   String description;
   String pictureUrl;
+  String category;
 
   Bottle.fromMap(Map<String, dynamic> data) {
     this.bottleId = data[MapNames.bottleId];
     this.bottleName = data[MapNames.bottleName];
     this.description = data[MapNames.description];
     this.pictureUrl = data[MapNames.pictureUrl];
+    this.category = data[MapNames.category];
   }
 }
 
@@ -105,10 +107,11 @@ class PreParedBottle {
   String bottleId;
   String bottleName;
   String description;
+  String category;
   NetworkImage image;
 
   PreParedBottle(
-      {this.bottleId, this.bottleName, this.description, this.image});
+      {this.bottleId, this.bottleName, this.description, this.image, @required this.category});
 }
 
 class BottleSize {
@@ -138,6 +141,7 @@ class UserDetails {
   String secondName;
   String email;
   String dateOfBirth;
+  String phone;
 
   UserDetails.fromMap(Map<String, dynamic> data) {
     this.uid = data[MapNames.uid];
@@ -145,18 +149,21 @@ class UserDetails {
     this.secondName = data[MapNames.secondName];
     this.email = data[MapNames.email];
     this.dateOfBirth = data[MapNames.dateOfBirth];
+    this.phone = data['phone'];
   }
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toMap() =>
+      {
         MapNames.uid: this.uid,
         MapNames.firstName: this.firstName,
         MapNames.secondName: this.secondName,
         MapNames.email: this.email,
         MapNames.dateOfBirth: this.dateOfBirth,
+        'phone' : this.phone,
       };
 
-  UserDetails(
-      this.uid, this.email, this.firstName, this.secondName, this.dateOfBirth);
+  UserDetails(this.uid, this.email, this.firstName, this.secondName,
+      this.dateOfBirth, this.phone);
 }
 
 class BasketBottle {
@@ -170,7 +177,8 @@ class BasketBottle {
     this.sizeId = data[MapNames.sizeId];
   }
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toMap() =>
+      {
         MapNames.bottleId: this.bottleId,
         MapNames.sizeId: this.sizeId,
       };
@@ -215,17 +223,17 @@ class Address {
   double longitude;
   double latitude;
 
-  Address(
-      {this.addressId,
-      this.suburb,
-      this.street,
-      this.apartmentName,
-      this.houseNumber,
-      this.additionalInstructions,
-      this.longitude,
-      this.latitude});
+  Address({this.addressId,
+    this.suburb,
+    this.street,
+    this.apartmentName,
+    this.houseNumber,
+    this.additionalInstructions,
+    this.longitude,
+    this.latitude});
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toMap() =>
+      {
         'id': this.addressId,
         'suburb': this.suburb,
         'street': this.street,
@@ -235,6 +243,7 @@ class Address {
         'long': longitude,
         'lat': latitude,
       };
+
   Address.fromMap(Map<String, dynamic> data){
     this.addressId = data['id'];
     this.suburb = data['suburb'];
@@ -254,7 +263,8 @@ class BasketItem {
 
   BasketItem({this.bottleID, this.sizeID, this.bottleCount});
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toMap() =>
+      {
         DatabaseProvider.ColumnBottleID: this.bottleID,
         DatabaseProvider.ColumnSizeID: this.sizeID,
         DatabaseProvider.ColumnCount: this.bottleCount,
@@ -265,4 +275,11 @@ class BasketItem {
     this.sizeID = data[DatabaseProvider.ColumnSizeID];
     this.bottleCount = data[DatabaseProvider.ColumnCount];
   }
+}
+
+class ActiveOrder {
+  PlacedOrder order;
+  List<BasketItem> list;
+
+  ActiveOrder({@required this.order, @required this.list});
 }

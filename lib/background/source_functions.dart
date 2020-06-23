@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tunywe/background/viewModel.dart';
-import 'package:tunywe/ui/home/order/bottle/BottleList.dart';
 
 import 'model.dart';
 
@@ -18,7 +17,8 @@ Future<List<Combined>> getCombined(ViewModel viewModel) async {
         bottleId: _bottle.bottleId,
         bottleName: _bottle.bottleName,
         description: _bottle.description,
-        image: NetworkImage(_bottle.pictureUrl));
+        image: NetworkImage(_bottle.pictureUrl),
+    category: _bottle.category);
     var snap2 = await Firestore.instance
         .collection('products')
         .document(bottle.documentID)
@@ -64,6 +64,30 @@ Future<List<PreviousOrder>> getPreviousBottle(ViewModel viewModel) async {
   return list;
 }
 
+Future<bool> checkActiveOrders(ViewModel viewModel) async {
+  Firestore.instance.collection('active').getDocuments().then((value) {
+    List<ActiveOrder> list = new List();
+    value.documents.forEach((element) {
+      PlacedOrder placedOrder = PlacedOrder.fromMap(element.data);
+      Firestore.instance
+          .collection('active')
+          .document(element.documentID)
+          .collection('bottles')
+          .getDocuments()
+          .then((ds) {
+        List<BasketItem> basket = new List();
+        ds.documents.forEach((element2) {
+          BasketItem basketItem = BasketItem.fromMap(element2.data);
+          basket.add(basketItem);
+        });
+        list.add(ActiveOrder(order: placedOrder, list: basket));
+      });
+    });
+    viewModel.orders = list;
+  });
+  return true;
+}
+
 initialize(BuildContext context) async {
   ViewModel viewModel = Provider.of<ViewModel>(context, listen: false);
   SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -71,21 +95,55 @@ initialize(BuildContext context) async {
   redoFunction(viewModel);
   viewModel.user = user;
   viewModel.preferences = preferences;
- // getCombined(viewModel);
+  checkActiveOrders(viewModel);
+  getAddresses(viewModel);
+  // getCombined(viewModel);
 }
 
 Future<List<Address>> getAddresses(ViewModel viewModel) async {
   List<Address> list = new List();
-  var doc = Firestore.instance
-      .collection('users')
-      .document(viewModel.user.uid)
-      .collection('address');
-  doc.getDocuments().then((value) {
+  FirebaseUser user = await FirebaseAuth.instance.currentUser();
+  (user != null)
+      ? Firestore.instance
+          .collection('users')
+          .document(user.uid)
+          .collection('address')
+          .getDocuments()
+          .then((value) {
+          value.documents.forEach((element) {
+            list.add(Address.fromMap(element.data));
+            print('at function ' + list.length.toString());
+          });
+          print('at second function ' + list.length.toString());
+        })
+      : print('user null');
+  print('at last function ' + list.length.toString());
+  viewModel.addressList = list;
+  print('Address list length ' + list.length.toString());
+  return list;
+}
+
+switchOder(PlacedOrder placedOrder) async {
+  var doc =
+      Firestore.instance.collection('active').document(placedOrder.orderId);
+  FirebaseUser user = await FirebaseAuth.instance.currentUser();
+  doc.collection('bottle').getDocuments().then((value) {
+    var doc2 = Firestore.instance
+        .collection('users')
+        .document(user.uid)
+        .collection('previous')
+        .document(placedOrder.orderId);
+    doc2.setData(placedOrder.toMap());
     value.documents.forEach((element) {
-      list.add(Address.fromMap(element.data));
+      doc2.collection('bottles').add(element.data);
+    });
+    doc.delete();
+    doc.collection('bottles').getDocuments().then((value) {
+      value.documents.forEach((element) {
+        element.reference.delete();
+      });
     });
   });
-  return list;
 }
 
 redoFunction(ViewModel viewModel) {
@@ -102,7 +160,8 @@ redoFunction(ViewModel viewModel) {
           image: (bottle.pictureUrl == null)
               ? NetworkImage(
                   'https://images.unsplash.com/photo-1592466509322-3318a3d907d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1208&q=80')
-              : NetworkImage(bottle.pictureUrl));
+              : NetworkImage(bottle.pictureUrl),
+      category: bottle.category);
       List<BottleSize> list = new List();
       fireStore
           .collection('products')

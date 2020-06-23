@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tunywe/background/model.dart';
-import 'package:tunywe/background/source_functions.dart';
 import 'package:tunywe/background/viewModel.dart';
 import 'package:tunywe/ui/login/Address.dart';
 
@@ -13,20 +12,17 @@ class SelectAddress extends StatefulWidget {
 }
 
 class _SelectAddressState extends State<SelectAddress> {
-  List<Address> addressList;
-
   @override
   void initState() {
     super.initState();
+    //getAddresses(Provider.of<ViewModel>(context));
   }
 
   @override
   Widget build(BuildContext context) {
-    getAddresses(Provider.of<ViewModel>(context)).then((value) {
-      setState(() {
-        addressList = value;
-      });
-    });
+    List<Address> addressList =
+        Provider.of<ViewModel>(context, listen: true).addressList;
+    print(addressList);
     return CustomScrollView(
       slivers: (addressList == null)
           ? [
@@ -40,6 +36,10 @@ class _SelectAddressState extends State<SelectAddress> {
             ]
           : (addressList.isEmpty)
               ? [
+                  SliverAppBar(
+                    automaticallyImplyLeading: true,
+                    title: Text('Select Address'),
+                  ),
                   SliverToBoxAdapter(
                     child: Material(
                         child: Text('No addresses found'),
@@ -61,6 +61,10 @@ class _SelectAddressState extends State<SelectAddress> {
                   )
                 ]
               : [
+                  SliverAppBar(
+                    automaticallyImplyLeading: true,
+                    title: Text('Select Address'),
+                  ),
                   SliverList(
                       delegate: SliverChildBuilderDelegate((context, index) {
                     Address address = addressList[index];
@@ -88,8 +92,10 @@ class _SelectAddressState extends State<SelectAddress> {
                             onPressed: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => NewAddress(
-                                          toHome: false,
+                                    builder: (context) => Consumer<ViewModel>(
+                                          builder: (a, b, c) => NewAddress(
+                                            toHome: false,
+                                          ),
                                         ))),
                             icon: Icon(Icons.add),
                             label: Text('Add Address')),
