@@ -1,0 +1,403 @@
+repo_name: seanodera/tunywe
+report_id: db50ab86d13158f236a762642f01ba1f
+version: 0.1
+repo_type: Public
+timestamp: '2024-07-07T22:09:21+00:00'
+requested_by: seanodera
+provider: github
+branch: master
+detected_tools_count: 31
+tools:
+- name: Dart
+  description: A new web programming language with libraries, a virtual machine, and
+    tools
+  website_url: https://www.dartlang.org/
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1646/Twitter-02.png
+  detection_source_url: https://github.com/seanodera/tunywe
+  detection_source: Repo Metadata
+- name: JavaScript
+  description: Lightweight, interpreted, object-oriented language with first-class
+    functions
+  website_url: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.yaml
+  detection_source: pubspec.yaml
+  last_updated_by: sean
+  last_updated_on: 2020-06-15 12:34:26.000000000 Z
+- name: Kotlin
+  description: Statically typed Programming Language targeting JVM and JavaScript
+  website_url: https://kotlinlang.org/
+  open_source: true
+  hosted_saas: true
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/3750/pCfEzr6L.png
+  detection_source_url: https://github.com/seanodera/tunywe
+  detection_source: Repo Metadata
+- name: Objective-C
+  description: The primary programming language you use when writing software for
+    OS X and iOS
+  website_url: https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1008/xcode.png
+  detection_source_url: https://github.com/seanodera/tunywe
+  detection_source: Repo Metadata
+- name: Swift
+  description: An innovative new programming language for Cocoa and Cocoa Touch.
+  website_url: https://developer.apple.com/swift/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1009/tuHsaI2U.png
+  detection_source_url: https://github.com/seanodera/tunywe
+  detection_source: Repo Metadata
+- name: Android SDK
+  description: An SDK that provides you the API libraries and developer tools necessary
+    to build, test, and debug apps for Android.
+  website_url: http://developer.android.com
+  version: '29.0'
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Frameworks (Full Stack)
+  image_url: https://img.stackshare.io/service/1010/m8jf0po4imu8t5eemjdd.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/android/app/build.gradle
+  detection_source: android/app/build.gradle
+  last_updated_by: sean
+  last_updated_on: 2020-06-15 12:34:26.000000000 Z
+- name: Flutter
+  description: Cross-platform mobile framework from Google
+  website_url: https://flutter.io/
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Cross-Platform Mobile Development
+  image_url: https://img.stackshare.io/service/7180/flutter-mark-square-100.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/flutter_package/pubspec.yaml
+  detection_source: flutter_package/pubspec.yaml
+  last_updated_by: thegreatsoo421
+  last_updated_on: 2020-06-18 20:17:47.000000000 Z
+- name: Firebase
+  description: The Realtime App Platform
+  website_url: https://firebase.google.com/
+  open_source: false
+  hosted_saas: true
+  category: Application Hosting
+  sub_category: Realtime Backend / API
+  image_url: https://img.stackshare.io/service/116/cZLxNFZS.jpg
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/android/app/build.gradle
+  detection_source: android/app/build.gradle
+  last_updated_by: sean
+  last_updated_on: 2020-06-15 12:34:26.000000000 Z
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/seanodera/tunywe
+  detection_source: Repo Metadata
+- name: GitHub Actions
+  description: Automate your workflow from idea to production
+  website_url: https://github.com/features/actions
+  open_source: false
+  hosted_saas: true
+  category: Build, Test, Deploy
+  sub_category: Continuous Integration
+  image_url: https://img.stackshare.io/service/11563/actions.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/.github/workflows/dart.yml
+  detection_source: ".github/workflows/dart.yml"
+  last_updated_by: thegreatsoo421
+  last_updated_on: 2020-06-15 12:35:41.000000000 Z
+- name: Gradle
+  description: A powerful build system for the JVM
+  website_url: https://www.gradle.org/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Java Build Tools
+  image_url: https://img.stackshare.io/service/975/gradlephant-social-black-bg.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/android/app/build.gradle
+  detection_source: android/app/build.gradle
+  last_updated_by: sean
+  last_updated_on: 2020-06-15 12:34:26.000000000 Z
+- name: npm
+  description: The package manager for JavaScript.
+  website_url: https://www.npmjs.com/
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Front End Package Manager
+  image_url: https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.yaml
+  detection_source: pubspec.yaml
+  last_updated_by: sean
+  last_updated_on: 2020-06-15 12:34:26.000000000 Z
+- name: Android OS
+  description: An open source mobile operating system by Google
+  website_url: https://www.android.com
+  version: '10.0'
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Operating Systems
+  image_url: https://img.stackshare.io/service/9586/ZvmtaSXW_400x400.jpg
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/android/app/build.gradle
+  detection_source: android/app/build.gradle
+  last_updated_by: sean
+  last_updated_on: 2020-06-15 12:34:26.000000000 Z
+- name: cloud_firestore
+  description: Flutter plugin for Cloud Firestore
+  package_url: https://pub.dartlang.org/cloud_firestore
+  version: 0.13.5
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.lock
+  detection_source: pubspec.yaml
+  last_updated_by: thegreatsoo421
+  last_updated_on: 2020-06-18 20:18:09.000000000 Z
+- name: cupertino_icons
+  description: Default icons asset for Cupertino widgets based on Apple styled icons
+  package_url: https://pub.dartlang.org/cupertino_icons
+  version: 0.1.3
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.lock
+  detection_source: pubspec.yaml
+  last_updated_by: sean
+  last_updated_on: 2020-06-15 12:34:26.000000000 Z
+- name: firebase_analytics
+  description: Flutter plugin for Google Analytics for Firebase
+  package_url: https://pub.dartlang.org/firebase_analytics
+  version: 5.0.11
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.lock
+  detection_source: pubspec.yaml
+  last_updated_by: thegreatsoo421
+  last_updated_on: 2020-06-18 20:18:09.000000000 Z
+- name: firebase_auth
+  description: Flutter plugin for Firebase Auth
+  package_url: https://pub.dartlang.org/firebase_auth
+  version: 0.16.0
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.lock
+  detection_source: pubspec.yaml
+  last_updated_by: thegreatsoo421
+  last_updated_on: 2020-06-18 20:18:09.000000000 Z
+- name: firebase_core
+  description: Flutter plugin for Firebase Core
+  package_url: https://pub.dartlang.org/firebase_core
+  version: 0.4.4
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.lock
+  detection_source: pubspec.yaml
+  last_updated_by: thegreatsoo421
+  last_updated_on: 2020-06-18 20:18:09.000000000 Z
+- name: firebase_storage
+  description: Flutter plugin for Firebase Cloud Storage
+  package_url: https://pub.dartlang.org/firebase_storage
+  version: 3.1.5
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.lock
+  detection_source: pubspec.yaml
+  last_updated_by: thegreatsoo421
+  last_updated_on: 2020-06-18 20:18:09.000000000 Z
+- name: flushbar
+  description: A flexible widget for user notification
+  package_url: https://pub.dartlang.org/flushbar
+  version: 1.10.4
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.lock
+  detection_source: pubspec.yaml
+  last_updated_by: sean
+  last_updated_on: 2020-06-15 12:34:26.000000000 Z
+- name: flutter
+  description: Visit flutter.io to get started
+  package_url: https://pub.dartlang.org/flutter
+  version: 0.0.0
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/flutter_package/pubspec.lock
+  detection_source: flutter_package/pubspec.yaml
+  last_updated_by: thegreatsoo421
+  last_updated_on: 2020-06-18 20:17:47.000000000 Z
+- name: line_awesome_icons
+  description: Flutter plugin for the Line Awesome Icon pack as Flutter Icons widget
+  package_url: https://pub.dartlang.org/line_awesome_icons
+  version: 1.0.4
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.lock
+  detection_source: pubspec.yaml
+  last_updated_by: sean
+  last_updated_on: 2020-06-15 12:34:26.000000000 Z
+- name: line_icons
+  description: Another icon library
+  package_url: https://pub.dartlang.org/line_icons
+  version: 0.2.0
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.lock
+  detection_source: pubspec.yaml
+  last_updated_by: sean
+  last_updated_on: 2020-06-15 12:34:26.000000000 Z
+- name: location
+  description: Cross-platform plugin for easy access to device's location in real-time
+  package_url: https://pub.dartlang.org/location
+  version: 3.0.2
+  license: MIT
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.lock
+  detection_source: pubspec.yaml
+  last_updated_by: thegreatsoo421
+  last_updated_on: 2020-06-23 01:45:29.000000000 Z
+- name: location_permissions
+  description: Location permission plugin for Flutter
+  package_url: https://pub.dartlang.org/location_permissions
+  version: 3.0.0
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.lock
+  detection_source: pubspec.yaml
+  last_updated_by: thegreatsoo421
+  last_updated_on: 2020-06-24 18:21:12.000000000 Z
+- name: path
+  description: A string-based path manipulation library
+  package_url: https://pub.dartlang.org/path
+  version: 1.7.0
+  license: BSD-3-Clause
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/flutter_package/pubspec.lock
+  detection_source: pubspec.yaml
+  last_updated_by: sean
+  last_updated_on: 2020-06-15 12:34:26.000000000 Z
+- name: provider
+  description: A wrapper around InheritedWidget to make them easier to use and more
+    reusable
+  package_url: https://pub.dartlang.org/provider
+  version: 4.1.1
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.lock
+  detection_source: pubspec.yaml
+  last_updated_by: sean
+  last_updated_on: 2020-06-15 12:34:26.000000000 Z
+- name: shared_preferences
+  description: Flutter plugin for reading and writing simple key-value pairs
+  package_url: https://pub.dartlang.org/shared_preferences
+  version: 0.5.7
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.lock
+  detection_source: pubspec.yaml
+  last_updated_by: sean
+  last_updated_on: 2020-06-15 12:34:26.000000000 Z
+- name: sprintf
+  description: Dart implementation of sprintf
+  package_url: https://pub.dartlang.org/sprintf
+  version: 4.0.2
+  license: BSD-2-Clause
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.lock
+  detection_source: pubspec.yaml
+  last_updated_by: sean
+  last_updated_on: 2020-06-15 12:34:26.000000000 Z
+- name: sqflite
+  description: Flutter plugin for SQLite
+  package_url: https://pub.dartlang.org/sqflite
+  version: 1.3.0
+  license: BSD-2-Clause
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/pub/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/pubspec.lock
+  detection_source: pubspec.yaml
+  last_updated_by: sean
+  last_updated_on: 2020-06-15 12:34:26.000000000 Z
+- name: org.jetbrains.kotlin:kotlin-stdlib-jdk7
+  description: Kotlin Standard Library JDK 7 extension
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/seanodera/tunywe/blob/master/android/app/build.gradle
+  detection_source: android/app/build.gradle
+  last_updated_by: sean
+  last_updated_on: 2020-06-15 12:34:26.000000000 Z
